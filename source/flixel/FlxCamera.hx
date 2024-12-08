@@ -1,7 +1,5 @@
 package flixel;
 
-apackage flixel;
-
 import flixel.graphics.tile.FlxGraphicsShader;
 import openfl.filters.ShaderFilter;
 import openfl.display.Bitmap;

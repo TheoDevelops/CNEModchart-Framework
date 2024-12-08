@@ -14,11 +14,11 @@ class Stealth extends Modifier
 	public static var fadeDistY = 65;
 
 	public function getSuddenEnd(params){
-		return (FlxG.height* 0.5) + fadeDistY * FlxMath.remapToRange(getPercent('sudden', params.field),0,1,1,1.25) + (FlxG.height* 0.5) * getPercent("suddenOffset", params.field);
+		return (-120 * getPercent('suddenExtend', params.field)) + (FlxG.height* 0.5) + fadeDistY * FlxMath.remapToRange(getPercent('sudden', params.field),0,1,1,1.25) + (FlxG.height* 0.5) * getPercent("suddenOffset", params.field);
 	}
 
 	public function getSuddenStart(params){
-		return (FlxG.height* 0.5) + fadeDistY * FlxMath.remapToRange(getPercent('sudden', params.field),0,1,0,0.25) + (FlxG.height* 0.5) * getPercent("suddenOffset", params.field);
+		return (120 * getPercent('suddenExtend', params.field)) + (FlxG.height* 0.5) + fadeDistY * FlxMath.remapToRange(getPercent('sudden', params.field),0,1,0,0.25) + (FlxG.height* 0.5) * getPercent("suddenOffset", params.field);
 	}
 	public function new()
 	{
@@ -35,7 +35,7 @@ class Stealth extends Modifier
 		// sudden
 		var sudden = getPercent('sudden', params.field);
 		data.alpha += suddenAlpha * sudden;
-		data.glow -= getPercent('flash', params.field) + suddenAlpha * sudden;
+		data.glow -= getPercent('flash', params.field) + suddenAlpha * (sudden * 1.5);
 
 		return data;
 	}

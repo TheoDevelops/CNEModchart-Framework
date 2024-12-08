@@ -124,6 +124,7 @@ class Manager extends FlxBasic
 		addModifier('reverse');
 		addModifier('stealth');
 		addModifier('confusion');
+		addModifier('skew');
 
 		setPercent('arrowPathAlpha', 1, -1);
 		setPercent('arrowPathThickness', 1, -1);
@@ -404,6 +405,7 @@ class Manager extends FlxBasic
 		).add(ModchartUtil.getHalfPos());
 
 		var vertTotal:Array<Float> = [];
+		var transfTotal:Array<ColorTransform> = [];
 
 		var lastVis:Visuals = null;
 		var lastQuad:Array<Vector3D> = null;
@@ -443,21 +445,21 @@ class Manager extends FlxBasic
 				arrowVisuals = topVisuals;
 			}
 
-			alphaTotal += topVisuals.alpha;
+			alphaTotal += arrowVisuals.alpha;
+
+			transfTotal.push(new ColorTransform(
+				1 - topVisuals.glow,
+				1 - topVisuals.glow,
+				1 - topVisuals.glow,
+				topVisuals.alpha * 0.6,
+				Math.round(topVisuals.glowR * topVisuals.glow * 255),
+				Math.round(topVisuals.glowG * topVisuals.glow * 255),
+				Math.round(topVisuals.glowB * topVisuals.glow * 255)
+			));
 		}
 
 		if (alphaTotal <= 0)
 			return;
-
-		var color = new ColorTransform(
-			1 - arrowVisuals.glow,
-			1 - arrowVisuals.glow,
-			1 - arrowVisuals.glow,
-			arrowVisuals.alpha * 0.6,
-			Math.round(arrowVisuals.glowR * arrowVisuals.glow * 255),
-			Math.round(arrowVisuals.glowG * arrowVisuals.glow * 255),
-			Math.round(arrowVisuals.glowB * arrowVisuals.glow * 255)
-		);
 
 		arrow._z = arrowQuads[2].z * 1000;
 
@@ -466,7 +468,10 @@ class Manager extends FlxBasic
 
 		var cameras:Array<FlxCamera> = arrow._cameras ?? arrow.strumLine.cameras;
 		for (camera in cameras)
-			camera.drawTriangles(arrow.graphic, _vertices, _indices, _uvtData, new Vector<Int>(), null, arrow.blend, false, false, color, arrow.shader);
+		{
+			var item = camera.startTrianglesBatch(arrow.graphic, false, true, arrow.blend, true, arrow.shader);
+			item.addTrianglesTransforms(_vertices, _indices, _uvtData, new Vector<Int>(), null, camera._bounds, transfTotal);
+		}
 	}
 	// TODO: Optimize this
 	/**

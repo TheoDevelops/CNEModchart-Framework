@@ -96,7 +96,7 @@ class ModchartUtil
 	}
 	inline static public function getHoldUVT(arrow:Note, subs:Int)
 	{
-		var uv = new DrawData<Float>(8 * subs, false, []);
+		var uv = new DrawData<Float>(8 * subs, true, []);
 
 		var frameUV = arrow.frame.uv;
 		var frameHeight = frameUV.height - frameUV.y;
