@@ -30,5 +30,5 @@
    - [X] Skew
 - [ ] Multiple playfields support
 - [X] Add note path (like not itg)
-- [ ] Standalone System (Using Macros & Plugin-based Classes)
+- [ ] Standalone System (Using Macros & Plugin-based Classes (Multiple engine support loool))
 - [X] Hold Graphic Subdivition System (theres already hold subdivs but are baad)

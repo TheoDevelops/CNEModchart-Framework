@@ -305,10 +305,6 @@ class Manager extends FlxBasic
 			output1.visuals
 		];
 	}
-	/**
-	 * TODO: Implement a custom renderer
-	 * to rotate the arrow graphic.
-	 */
 	function drawReceptor(receptor:Strum) @:privateAccess {
         final lane = receptor.extra.get('lane') ?? 0;
         final field = receptor.extra.get('field') ?? 0;
