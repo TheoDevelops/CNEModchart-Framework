@@ -1,0 +1,18 @@
+{
+	"beatsPerMeasure": 4,
+	"opponentModeAllowed": true,
+	"coopAllowed": true,
+	"stepsPerBeat": 4,
+	"bpm": 176,
+	"difficulties": [
+		"easy",
+		"normal",
+		"hard"
+	],
+	"needsVoices": true,
+	"parsedColor": -1,
+	"displayName": "D-Endless",
+	"icon": "bf",
+	"name": "d-endless",
+	"color": "#FFFFFF"
+}

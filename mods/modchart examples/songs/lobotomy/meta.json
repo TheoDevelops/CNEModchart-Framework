@@ -1,0 +1,16 @@
+{
+	"opponentModeAllowed": false,
+	"coopAllowed": false,
+	"stepsPerBeat": 4,
+	"beatsPerMesure": 4,
+	"bpm": 134,
+	"difficulties": [
+		"LOBOTOMY"
+	],
+	"needsVoices": true,
+	"parsedColor": -14360062,
+	"displayName": "lobotomy",
+	"icon": "green",
+	"name": "lobotomy",
+	"color": "#24E202"
+}

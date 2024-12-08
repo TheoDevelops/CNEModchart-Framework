@@ -1,0 +1,24 @@
+{
+    "params": [
+        {
+            "name": "duration1",
+            "type": "String",
+            "defaultValue": "0.5"
+        },
+        {
+            "name": "duration2",
+            "type": "String",
+            "defaultValue": "0.5"
+        },
+        {
+            "name": "yy1, to turn it off set it 900",
+            "type": "String",
+            "defaultValue": "600"
+        },
+        {
+            "name": "yy2, to turn it off set it 1000",
+            "type": "String",
+            "defaultValue": "900"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+	"beatsPerMeasure": 4,
+	"opponentModeAllowed": false,
+	"coopAllowed": false,
+	"stepsPerBeat": 4,
+	"bpm": 190,
+	"difficulties": [
+		"VOID"
+	],
+	"needsVoices": false,
+	"parsedColor": -7769603,
+	"displayName": "null-and-void",
+	"icon": "senpai",
+	"name": "null-and-void",
+	"color": "#8971FD",
+	"customValues": {}
+}

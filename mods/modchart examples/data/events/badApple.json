@@ -1,0 +1,9 @@
+{
+	"params": [
+		{
+			"name": "Choose, to reset is type 'b'",
+			"type": "String",
+			"defaultValue": "b"
+		}
+	]
+}

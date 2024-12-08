@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="fire.png">
+<SubTexture name="idle0000" x="0" y="0" width="323" height="366" frameX="-100" frameY="-83" frameWidth="512" frameHeight="512" />
+<SubTexture name="idle0001" x="323" y="0" width="323" height="366" frameX="-100" frameY="-83" frameWidth="512" frameHeight="512" />
+<SubTexture name="idle0002" x="646" y="0" width="323" height="366" frameX="-100" frameY="-83" frameWidth="512" frameHeight="512" />
+<SubTexture name="idle0003" x="0" y="366" width="323" height="366" frameX="-100" frameY="-83" frameWidth="512" frameHeight="512" />
+<SubTexture name="idle0004" x="323" y="366" width="323" height="366" frameX="-100" frameY="-83" frameWidth="512" frameHeight="512" />
+<SubTexture name="idle0005" x="646" y="366" width="323" height="366" frameX="-100" frameY="-83" frameWidth="512" frameHeight="512" />
+<SubTexture name="idle0006" x="969" y="0" width="323" height="366" frameX="-100" frameY="-83" frameWidth="512" frameHeight="512" />
+<SubTexture name="idle0007" x="969" y="366" width="323" height="366" frameX="-100" frameY="-83" frameWidth="512" frameHeight="512" />
+<SubTexture name="idle0008" x="0" y="732" width="323" height="366" frameX="-100" frameY="-83" frameWidth="512" frameHeight="512" />
+<SubTexture name="idle0009" x="323" y="732" width="323" height="366" frameX="-100" frameY="-83" frameWidth="512" frameHeight="512" />
+<SubTexture name="idle0010" x="646" y="732" width="323" height="366" frameX="-100" frameY="-83" frameWidth="512" frameHeight="512" />
+<SubTexture name="idle0011" x="969" y="732" width="323" height="366" frameX="-100" frameY="-83" frameWidth="512" frameHeight="512" />
+<SubTexture name="idle0012" x="1292" y="0" width="323" height="366" frameX="-100" frameY="-83" frameWidth="512" frameHeight="512" />
+<SubTexture name="idle0013" x="1292" y="366" width="323" height="366" frameX="-100" frameY="-83" frameWidth="512" frameHeight="512" />
+</TextureAtlas>

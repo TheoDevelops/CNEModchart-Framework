@@ -1,0 +1,7 @@
+"removes" backround
+
+value 1: true
+	yay it works
+
+value 1:false
+	yurn off this shit i need popla

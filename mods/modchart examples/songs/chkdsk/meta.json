@@ -1,0 +1,17 @@
+{
+	"beatsPerMeasure": 4,
+	"opponentModeAllowed": false,
+	"coopAllowed": false,
+	"stepsPerBeat": 4,
+	"bpm": 200,
+	"difficulties": [
+		"TRUC"
+	],
+	"needsVoices": false,
+	"parsedColor": -7572995,
+	"displayName": "chkdsk",
+	"icon": "face",
+	"name": "chkdsk",
+	"color": "#8C71FD",
+	"customValues": {}
+}

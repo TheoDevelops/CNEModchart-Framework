@@ -1,0 +1,18 @@
+{
+	"opponentModeAllowed": false,
+	"coopAllowed": false,
+	"stepsPerBeat": 4,
+	"beatsPerMesure": 4,
+	"bpm": 160,
+	"difficulties": [
+		"easy",
+		"normal",
+		"hard"
+	],
+	"needsVoices": true,
+	"parsedColor": -14360062,
+	"displayName": "False Paradise",
+	"icon": "dad",
+	"name": "false-paradise",
+	"color": "#24E202"
+}

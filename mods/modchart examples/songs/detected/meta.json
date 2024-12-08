@@ -1,0 +1,17 @@
+{
+	"beatsPerMeasure": 4,
+	"opponentModeAllowed": false,
+	"coopAllowed": false,
+	"stepsPerBeat": 4,
+	"bpm": 195,
+	"difficulties": [
+		"normal"
+	],
+	"needsVoices": false,
+	"parsedColor": -7572995,
+	"displayName": "Detected",
+	"icon": "face",
+	"name": "detected",
+	"color": "#8C71FD",
+	"customValues": {}
+}

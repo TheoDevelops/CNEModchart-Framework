@@ -1,0 +1,8 @@
+<!DOCTYPE codename-engine-stage>
+<stage folder="bg/" name="lobotomy" zoom="0.7">
+	<sprite antialiasing="false" x="0" sprite="lobotomy" y="0" scale="1" name="bg"/>
+	<girlfriend x="1027" scroll="1" y="747"/>
+	<boyfriend x="1590" y="270"/>
+	<dad x="790" scroll="1" y="220"/>
+	<combo x="1327.25" y="486.75"/>
+</stage>
