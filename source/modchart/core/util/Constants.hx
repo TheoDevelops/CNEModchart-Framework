@@ -20,6 +20,7 @@ class RenderParams
 	// for hold mods
 	public var __holdParentTime:Float;
 	public var __holdLength:Float;
+	public var __holdOffset:Float = 0;
 }
 
 @:structInit
@@ -34,6 +35,7 @@ class NoteData
 	// for hold mods
 	public var __holdParentTime:Float;
 	public var __holdLength:Float;
+	public var __holdOffset:Float = 0;
 }
 
 @:structInit

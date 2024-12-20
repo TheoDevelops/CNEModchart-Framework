@@ -58,3 +58,7 @@
 # 08/12/24
 - Skew Mods
 - Stealth mods (alpha, glows) now are smoother on holds (depending of your hold subdivition).
+
+# 17/12/24
+- Centered2 (also known as centered path)
+- Improvements

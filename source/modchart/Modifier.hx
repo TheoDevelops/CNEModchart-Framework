@@ -30,10 +30,6 @@ class Modifier
 	{
 		return data;
 	}
-	public function rotateScroll(curScroll:Vector3D):Vector3D
-	{
-		return curScroll;
-	}
     public function getAliases():Array<String>
         return [];
 	public function shouldRun(params:RenderParams):Bool
@@ -48,11 +44,9 @@ class Modifier
         return Manager?.instance?.modifiers?.getPercent(name, cField ?? field);
     }
     
-	private var __SUSTAIN:Bool = false;
-
-	private function getKeycount():Int
+	private function getKeycount(field:Int = 0):Int
 	{
-		return (PlayState?.instance?.strumLines?.members[0]?.length) ?? 4;
+		return (PlayState?.instance?.strumLines?.members[field]?.members?.length) ?? 4;
 	}
 	private function getPlayercount():Int
 	{

@@ -43,6 +43,7 @@ import modchart.core.util.Constants.NoteData;
 import modchart.core.util.Constants.Visuals;
 
 final rotationVector = new Vector3D();
+final emptyVector = new Vector3D();
 
 // @:build(modchart.core.macros.Macro.buildModifiers())
 @:allow(modchart.core.ModifierGroup)
@@ -310,9 +311,12 @@ class Manager extends FlxBasic
         final lane = receptor.extra.get('lane') ?? 0;
         final field = receptor.extra.get('field') ?? 0;
 
+		final centered2 = getPercent('centered2', field);
+		final timeC2 = FlxG.height * CENTERED_2_HEIGHT;
+
 		final noteData:NoteData = {
-			time: 0.,
-            hDiff: 0.,
+			time: timeC2 * centered2,
+            hDiff: timeC2 * centered2,
             receptor: lane,
             field: field,
 			arrow: false,
@@ -356,9 +360,13 @@ class Manager extends FlxBasic
 		
 	}
 	function drawTapArrow(arrow:Note) @:privateAccess {
-		final diff = arrow.strumTime - Conductor.songPosition;
+		final centered2 = getPercent('centered2', arrow.strumLine.ID);
+		final timeC2 = FlxG.height * CENTERED_2_HEIGHT * centered2;
+
+		final diff = (arrow.strumTime + timeC2) - Conductor.songPosition;
+
 		final noteData:NoteData = {
-			time: arrow.strumTime,
+			time: (arrow.strumTime + timeC2),
             hDiff: diff,
             receptor: arrow.strumID,
             field: arrow.strumLine.ID,
@@ -379,12 +387,12 @@ class Manager extends FlxBasic
 		final orient = getPercent('orient', arrow.strumLine.ID);
 		if (orient != 0)
 		{
-			arrowPos.setTo(
+			var basePos = new Vector3D(
 				getReceptorX(arrow.strumID, arrow.strumLine.ID) + ARROW_SIZEDIV2,
 				getReceptorY(arrow.strumID, arrow.strumLine.ID) + ARROW_SIZEDIV2, 0
 			);
 
-			final nextOutput = modifiers.getPath(arrowPos.clone(), noteData, 1);
+			final nextOutput = modifiers.getPath(basePos, noteData, 1);
 			final thisPos = ModchartUtil.applyVectorZoom(output.pos, output.visuals.zoom);
 			final nextPos = ModchartUtil.applyVectorZoom(nextOutput.pos, nextOutput.visuals.zoom);
 
@@ -419,7 +427,7 @@ class Manager extends FlxBasic
 		HOLD_SIZE = arrow.width;
 		HOLD_SIZEDIV2 = arrow.width * .5;
 
-		var subCr = (_crochet * ((arrow.nextSustain == null) ? 0.5 : 1) * holdScale) / HOLD_SUBDIVITIONS;
+		var subCr = (_crochet * ((arrow.nextSustain == null) ? 0.6 : 1) * holdScale) / HOLD_SUBDIVITIONS;
 		for (sub in 0...HOLD_SUBDIVITIONS)
 		{
 			var subOff = subCr * sub;
@@ -492,24 +500,23 @@ class Manager extends FlxBasic
 		__pathPoints.splice(0, __pathPoints.length);
 		__pathCommands.splice(0, __pathCommands.length);
 		__pathShape.graphics.clear();
+		__pathSprite.cameras = [game.camHUD];
 
 		// so we draw every path of every receptor once
 		// cus if not, it crashs (cus stack overflow or something like that (i dont founded the error....))
 		for (f in fields) {
-			__pathSprite.cameras = f._cameras.copy();
-			
 			for (r in f) {
 				final fn = r.extra.get('field');
-				final l = r.extra.get('lane');
 
 				final alpha = getPercent('arrowPathAlpha', fn);
 				final thickness = 1 + Math.round(getPercent('arrowPathThickness', fn));
 
-				if ((alpha + thickness) <= 0)
+				if (alpha <= 0 || thickness <= 0)
 					continue;
+				final l = r.extra.get('lane');
 				
-				final divitions = Math.round(35 / Math.max(1, getPercent('arrowPathDivitions', fn)));
-				final limit = 1250 * (1 + getPercent('arrowPathLength', fn));
+				final divitions = Math.round(80 / Math.max(1, getPercent('arrowPathDivitions', fn)));
+				final limit = 1500 * (1 + getPercent('arrowPathLength', fn));
 				final invertal = limit / divitions;
 
 				var moved = false;
@@ -517,11 +524,11 @@ class Manager extends FlxBasic
 				defaultPos.setTo(getReceptorX(l, fn), getReceptorY(l, fn), 0);
 				defaultPos.incrementBy(ModchartUtil.getHalfPos());
 
-				__pathShape.graphics.lineStyle(thickness, 0xFFFFFFFF, alpha);
+				__pathShape.graphics.lineStyle(thickness, 0xFFFFFFFF, alpha, false, NORMAL, ROUND, ROUND);
 
 				for (sub in 0...divitions)
 				{
-					var time = invertal * sub;
+					var time = -500 + invertal * sub;
 		
 					var output = modifiers.getPath(defaultPos.clone(), {
 						time: Conductor.songPosition + time,
@@ -538,8 +545,8 @@ class Manager extends FlxBasic
 					 * So it seems that if the lines are too far from the screen
 					   causes HORRIBLE memory leaks (from 60mb to 3gb-5gb in 2 seconds WHAT THE FUCK)
 					 */
-					if ((position.x <= 0 - thickness) || (position.x >= __pathSprite.pixels.rect.width) ||
-						(position.y <= 0 - thickness) || (position.y >= __pathSprite.pixels.rect.height))
+					if ((position.x <= 0 - thickness - ARROW_PATH_BOUNDARY_OFFSET) || (position.x >= __pathSprite.pixels.rect.width + ARROW_PATH_BOUNDARY_OFFSET) ||
+						(position.y <= 0 - thickness - ARROW_PATH_BOUNDARY_OFFSET) || (position.y >= __pathSprite.pixels.rect.height + ARROW_PATH_BOUNDARY_OFFSET))
 						continue;
 		
 					__pathCommands.push(moved ? GraphicsPathCommand.LINE_TO : GraphicsPathCommand.MOVE_TO);
@@ -551,7 +558,7 @@ class Manager extends FlxBasic
 			}
 		}
 
-		if (__pathPoints.length <= 0)
+		if (__pathPoints.length <= 1)
 			return;
 
 		__pathShape.graphics.drawPath(__pathCommands, __pathPoints);
@@ -586,7 +593,7 @@ class Manager extends FlxBasic
 			
 			var translated = ModchartUtil.rotate3DVector(rotationVector, output.visuals.angleX, output.visuals.angleY, output.visuals.angleZ);
 			translated.z *= 0.001;
-			var rotOutput = ModchartUtil.perspective(translated, new Vector3D());
+			var rotOutput = ModchartUtil.perspective(translated, emptyVector);
 
 			rotOutput.x *= zScale * output.visuals.zoom * output.visuals.scaleX;
 			rotOutput.y *= zScale * output.visuals.zoom * output.visuals.scaleY;
@@ -638,6 +645,9 @@ class Manager extends FlxBasic
 			Math.round(output.visuals.glowB * output.visuals.glow * 255)
 		);
 
+		if (color.alphaMultiplier + color.alphaOffset <= 0)
+			return;
+
 		var cameras:Array<FlxCamera> = sprite._cameras ?? game.strumLines.members[field].cameras;
 		for (camera in cameras)
 			camera.drawTriangles(sprite.graphic, vertices, new Vector<Int>(vertices.length, true, [for (i in 0...vertices.length) i]), uvData, new Vector<Int>(), null, sprite.blend, false, false, color, sprite.shader);
@@ -650,21 +660,31 @@ class Manager extends FlxBasic
 
 	function getNoteData(arrow:Note, posOff:Float = 0):NoteData
 	{
+		final centered2 = getPercent('centered2', arrow.strumLine.ID);
+		final timeC2 = FlxG.height * CENTERED_2_HEIGHT * centered2;
+
 		var pos = (arrow.strumTime - Conductor.songPosition) + posOff;
 
 		// clip rect
 		if (arrow.wasGoodHit && pos < 0)
 			pos = 0;
+
+		pos += timeC2;
+
 		return {
-			time: arrow.strumTime + posOff,
+			time: arrow.strumTime + posOff + timeC2,
 			hDiff: pos,
 			receptor: arrow.strumID,
 			field: arrow.strumLine.ID,
 			arrow: true,
-			__holdParentTime: arrow.isSustainNote ? arrow.extra.get('time') : -1,
-			__holdLength: arrow.isSustainNote ? arrow.extra.get('sLen') : -1
+			__holdParentTime: arrow.isSustainNote ? arrow.extra.get('sEntry') + posOff : -1,
+			__holdLength: arrow.isSustainNote ? arrow.sustainLength : -1,
+			__holdOffset: arrow.isSustainNote ? arrow.extra.get('sOff') : -1
 		};
 	}
+
+	inline static final CENTERED_2_HEIGHT:Float = 0.25;
+	inline static final ARROW_PATH_BOUNDARY_OFFSET:Float = 75;
 
 	override function destroy():Void
 	{

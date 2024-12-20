@@ -55,18 +55,11 @@ class Reverse extends Modifier
 		var centerPercent = getPercent('centered', params.field);		
 		shift = FlxMath.lerp(shift, (HEIGHT * 0.5) - ARROW_SIZEDIV2, centerPercent);
 
+		// TODO: long holds
 		var distance = params.hDiff;
 
-		if (false == true)
-		{
-			var long = getPercent('longHolds', params.field);
-			
-			var holdProgress = params.time - params.__holdParentTime;
-			var fHoldLength = FlxMath.remapToRange(holdProgress, 0, params.__holdLength, 0, params.__holdLength * long);
-			
-			distance = (params.__holdParentTime + fHoldLength) - params.sPos;
-		}
 		distance *= 0.45 * ModchartUtil.getScrollSpeed();
+
 		var scroll = new Vector3D(0, FlxMath.lerp(distance, -distance, reversePerc));
 		scroll = applyScrollMods(scroll, params);
 

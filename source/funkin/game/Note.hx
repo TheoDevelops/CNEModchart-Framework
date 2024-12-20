@@ -119,6 +119,9 @@ class Note extends FlxSprite
 				this.extra.set(field, Reflect.field(noteData, field));
 			}
 		}
+		this.extra.set('sLen', noteData.sLen.getDefault(0));
+		this.extra.set('sEntry', noteData.time.getDefault(0));
+		this.extra.set('sOff', sustainOffset);
 
 		x += 50;
 		// MAKE SURE ITS DEFINITELY OFF SCREEN?

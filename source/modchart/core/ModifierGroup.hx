@@ -54,6 +54,7 @@ class ModifierGroup
 		'infinite' => Infinite,
         'schmovindrunk' => SchmovinDrunk,
         'schmovintipsy' => SchmovinTipsy,
+        'schmovintornado' => SchmovinTornado,
         'wiggle' => Wiggle,
         'arrowshape' => ArrowShape,
         'eyeshape' => EyeShape,
@@ -110,6 +111,7 @@ class ModifierGroup
 				arrow: data.arrow,
 				__holdParentTime: data.__holdParentTime,
 				__holdLength: data.__holdLength,
+				__holdOffset: data.__holdOffset
 			}
 
 			if (!mod.shouldRun(args))
