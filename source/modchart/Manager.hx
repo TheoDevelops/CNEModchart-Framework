@@ -130,6 +130,7 @@ class Manager extends FlxBasic
 		setPercent('arrowPathAlpha', 1, -1);
 		setPercent('arrowPathThickness', 1, -1);
 		setPercent('arrowPathDivitions', 1, -1);
+		setPercent('rotateHoldY', 1, -1);
     }
 
 	public function registerModifier(name:String, mod:Class<Modifier>)   return modifiers.registerModifier(name, mod);
@@ -279,7 +280,7 @@ class Manager extends FlxBasic
 		{
 			var visuals = [output1.visuals, output2.visuals][i];
 
-			var translated = ModchartUtil.rotate3DVector(quads[i], visuals.angleX, visuals.angleY, visuals.angleZ);
+			var translated = ModchartUtil.rotate3DVector(quads[i], visuals.angleX * getPercent('rotateHoldX'), visuals.angleY * getPercent('rotateHoldY'), visuals.angleZ * getPercent('rotateHoldZ'));
 			translated.z *= 0.001;
 			var rotOutput = ModchartUtil.perspective(translated, new Vector3D());
 
@@ -593,7 +594,7 @@ class Manager extends FlxBasic
 			
 			var translated = ModchartUtil.rotate3DVector(rotationVector, output.visuals.angleX, output.visuals.angleY, output.visuals.angleZ);
 			translated.z *= 0.001;
-			var rotOutput = ModchartUtil.perspective(translated, emptyVector);
+			var rotOutput = ModchartUtil.perspective(translated, new Vector3D(FlxG.width / 2, FlxG.height / 2));
 
 			rotOutput.x *= zScale * output.visuals.zoom * output.visuals.scaleX;
 			rotOutput.y *= zScale * output.visuals.zoom * output.visuals.scaleY;

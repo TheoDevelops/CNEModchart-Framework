@@ -62,3 +62,9 @@
 # 17/12/24
 - Centered2 (also known as centered path)
 - Improvements
+
+# 31/12/24
+- Tornado Mod (from OpenITG)
+- Hold Rotation can be cancelled (via rotateHoldX, rotateHoldY, rotateHoldZ, can be 0-1)
+- Better Readme
+- Improvements

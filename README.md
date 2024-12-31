@@ -1,34 +1,21 @@
-# CNE FunkinModchart System
-> An Modchart backend library for Codename Engine. **_Under development_**
+<p align="center">
+  <h1 align="center">FunkinModchart</h1>
+  <h4 align="center">An Modcharting backend library for Codename Engine made by modders, to modders.</h4>
+</p>
 
-## Shotouts
-- 4mbr0s3: 3D Rotation Functions & Modifier Math
-- Riconuts: Modifier Math
-- Ne_Eo: Help with UVT data for sustains custom rendering (made me figure out how sprite sheet works) [Sustains before neeo help lol](https://github.com/TheoDevelops/CNEModchart-Framework/blob/main/art/nocontext.png)
-- lunarcleint: Support
+**FunkinModchart** is a tool designed to bring [NotITG](https://www.noti.tg/) visuals and capabilities to [Codename Engine](https://codename-engine.com/), adding modifiers to change the **arrow trajectory, colors, transparency and the  rotation angle through 3D Axes**, event system to change the modifier's percent easing or setting those to create endless amazing visual effects and even **more**!.
 
-## TODOS
-- [X] Class-Modifier Support
-- [X] Ease & Set Events Timeline
-- [X] POO Oriented Coding
-- [X] Custom Hold rendering (smooth sustains)
-- [X] Basic Z Rendering (Perspective)
-- [X] Basic modifiers included by default
-- [X] Basic 3D Rotation
-- [X] Rotation from different origins.
-- [X] Custom Receptor & Arrow rendering (3d view)
-- [X] Custom 3d view camera (using matrix)
-- [X] Fix sustain size and offsets when rotating & scaling
-- [X] Fix modifier indexing
-- [X] Scripted modifiers
-- [X] Add patterns modifiers
-- [X] Hability of modify more values on modifiers (alpha, color, angles, distances (speed), etc)
-   - [X] Alpha
-   - [X] Angle (x, y, z)
-   - [X] Scale
-   - [X] Color Transform
-   - [X] Skew
-- [ ] Multiple playfields support
-- [X] Add note path (like not itg)
-- [ ] Standalone System (Using Macros & Plugin-based Classes (Multiple engine support loool))
-- [X] Hold Graphic Subdivition System (theres already hold subdivs but are baad)
+This framework also provides **extra features** that can help you to make even more crazy visuals, as **arrow paths, 3D view camera, AFTs**, etc. *(If you have already modeled NotITG or StepMania, you know what I am talking about)*
+
+## Credits
+**OpenITG:** Some math taken for modifiers.
+
+**4mbr0s3:** Some code taken from [Schmovin'](https://github.com/4mbr0s3-2/Schmovin), his own Modcharting Lib. (really impresive)
+
+## Special Thanks
+
+**Ne_Eo (aka. Neo):** Support, help with some bugs.
+
+**lunercleint:** Support, such a nice guy!
+
+**Tsaku:** Support, bug finder. (thanks !!!)

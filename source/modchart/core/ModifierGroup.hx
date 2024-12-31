@@ -70,9 +70,18 @@ class ModifierGroup
 	private var percents:StringMap<IntMap<Float>> = new StringMap();
     private var modifiers:StringMap<Modifier> = new StringMap();
 
-	private var sortedMods:Array<String> = [];
+	private var sortedMods:Vector<String>;
 
-	public function new() {}
+	public function new()
+	{
+		__allocModSorting([]);
+	}
+
+	@:dox(hide)
+	@:noCompletion private function __allocModSorting(newList:Array<String>)
+	{
+		return sortedMods = Vector.fromArrayCopy(newList);
+	}
 
 	// just render mods with the perspective stuff included
 	public function getPath(pos:Vector3D, data:NoteData, ?posDiff:Float = 0, ?allowVis:Bool = true, ?allowPos:Bool = true):ModifierOutput
@@ -148,7 +157,10 @@ class ModifierGroup
 		}
 		var newModifier = Type.createInstance(modifierClass, []);
 		modifiers.set(name.toLowerCase(), newModifier);
-		sortedMods.push(name.toLowerCase());
+
+		final newArr = sortedMods.toArray();
+		newArr.push(name.toLowerCase());
+		__allocModSorting(newArr);
 	}
 
 	public function setPercent(name:String, value:Float, field:Int = -1)
